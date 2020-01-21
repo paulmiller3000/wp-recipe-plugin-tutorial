@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Recipe
- * Description: A simple WordPress plugin that allows users to create recipes and rate those recipes
+ * Description: A simple WordPress plugin that allows users to create recipes and rate those recipes. Source: https://www.udemy.com/course/wordpress-development-create-wordpress-themes-and-plugins
  * Version: 1.0
  * Author: Paul Miller
  * Author URI: https://paulmiller3000.com
@@ -32,6 +32,10 @@ include( 'includes/deactivate.php' );
 include( 'includes/utility.php' );
 include( 'includes/shortcodes/creator.php' );
 include( 'process/submit-user-recipe.php' );
+include( 'includes/admin/dashboard-widgets.php' );
+include( 'includes/admin/menus.php' );
+include( 'includes/admin/options-page.php' );
+include( 'process/save-options.php' );
 
 // Hooks
 register_activation_hook( __FILE__, 'r_activate_plugin');
@@ -49,6 +53,8 @@ add_action( 'widgets_init', 'r_widgets_init');
 add_action( 'r_daily_recipe_hook', 'r_daily_generate_recipe' );
 add_action( 'wp_ajax_r_submit_user_recipe', 'r_submit_user_recipe' );
 add_action( 'wp_ajax_nopriv_r_submit_user_recipe', 'r_submit_user_recipe' );
+add_action( 'wp_dashboard_setup', 'r_dashboard_widgets' );
+add_action( 'admin_menu', 'r_admin_menus' );
 
 // Shortcodes
 add_shortcode( 'recipe_creator', 'r_recipe_creator_shortcode' );
